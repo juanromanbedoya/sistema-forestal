@@ -1,106 +1,73 @@
-# 🌲 FMS — Forest Management System
+# 🌲 Sistema de Gestión Forestal — Forest Analysis
 
-> **La plataforma inteligente para transformar la gestión forestal, agrícola e industrial desde el terreno hasta el producto final.**
+Aplicación web **full stack** para analizar y gestionar zonas forestales sobre **mapas interactivos**: dibujar y guardar zonas y subzonas, calcular áreas, administrar un catálogo de especies, registrar la trazabilidad de los árboles y simular la extracción de madera por cable vía.
 
-**FMS — Forest Management System** es un sistema de gestión forestal de alta precisión diseñado para revolucionar la forma en que se administran fincas, lotes, árboles, madera, rutas, maquinaria, costos, productividad y trazabilidad.
+> Es el MVP de **FMS — Forest Management System**. La visión completa del producto está en [docs/VISION.md](docs/VISION.md).
 
-Este proyecto nace para resolver un problema real: muchas operaciones forestales y agroindustriales todavía dependen de registros manuales, cálculos aislados, hojas de Excel, comunicación informal y decisiones tomadas sin datos en tiempo real.
+## ✨ Funcionalidades
 
-FMS cambia esa realidad.
+- 🗺️ **Mapa interactivo**: dibujo de polígonos (Leaflet + Geoman), cálculo de área y búsqueda de direcciones y de zonas guardadas.
+- 🧩 **Zonas y subzonas forestales** con validación espacial (cada subzona debe quedar dentro de su zona).
+- 🌳 **Catálogo de especies** dinámico, con especies *probables* (según la región) separadas de las *confirmadas* manualmente.
+- 📦 **Trazabilidad forestal**: dashboard, estado de salud de los árboles, registro de impactos y mapa de trazabilidad.
+- 🏗️ **Simulador de cable vía**: diagrama con torres independientes para planear la extracción de madera.
+- 📊 **Reportes** de cobertura vegetal por zona.
+- 💾 Persistencia en base de datos y en el navegador (`localStorage`).
 
-Con esta plataforma, cada árbol, cada troza, cada ruta, cada costo, cada alerta y cada metro cúbico de madera puede ser registrado, calculado, trazado y analizado desde una arquitectura moderna, offline-first y lista para escalar.
+## 🛠️ Tecnologías
 
----
+| Capa | Tecnologías |
+|---|---|
+| Frontend | React 18 · React Router · React-Leaflet · Leaflet · Geoman · Axios · Capacitor |
+| Backend | Node.js · Express · API REST · validación y *rate limiting* |
+| Base de datos | PostgreSQL (PostGIS opcional) · SQLite para la demo local |
+| Despliegue | GitHub Actions → GitHub Pages (frontend) · Render (API) |
 
-## 🚀 Visión del proyecto
+## 🚀 Ejecución rápida (SQLite, sin instalar base de datos)
 
-FMS está diseñado para convertirse en el centro de control operativo de una finca forestal o agroindustrial.
+```bash
+git clone https://github.com/juan2052H/sistema-forestal.git
+cd sistema-forestal/forest-analysis-app
 
-Su objetivo es permitir que propietarios, ingenieros, administradores, operarios, contratistas y jefes de planta trabajen con información confiable, conectada y verificable.
+# Backend
+cd backend
+npm install
+cp .env.example .env          # en Windows: copy .env.example .env
+DB_CLIENT=sqlite npm run migrate   # PowerShell: $env:DB_CLIENT="sqlite"; npm run migrate
+DB_CLIENT=sqlite npm run seed
+DB_CLIENT=sqlite npm start
+```
 
-Desde el mapa de la finca hasta el producto terminado, el sistema permite responder preguntas críticas como:
+En otra terminal:
 
-- ¿De qué árbol salió esta madera?
-- ¿Qué lote está generando más rentabilidad?
-- ¿Cuánto volumen real hay disponible?
-- ¿Cuánta madera se perdió entre campo y planta?
-- ¿Qué ruta es más segura para extraer la carga?
-- ¿El cable soporta la tensión antes de mover la madera?
-- ¿Qué lote necesita fertilización, poda o control sanitario?
-- ¿Cuál es el costo real por metro cúbico?
-- ¿Qué tan eficiente está siendo el aserradero?
-- ¿Qué contratista debe pagarse y con base en qué volumen validado?
+```bash
+cd sistema-forestal/forest-analysis-app/frontend
+npm install
+npm start
+```
 
-FMS no es solo una aplicación.  
-Es una nueva forma de controlar, medir y optimizar la operación forestal.
+En Windows también puedes usar `forest-analysis-app/start.bat`.
 
----
+## 📚 Documentación
 
-## 🧠 Qué hace FMS
+| Documento | Contenido |
+|---|---|
+| [forest-analysis-app/README.md](forest-analysis-app/README.md) | Detalle técnico de la aplicación |
+| [forest-analysis-app/API.md](forest-analysis-app/API.md) | Endpoints de la API |
+| [forest-analysis-app/SETUP.md](forest-analysis-app/SETUP.md) | Instalación con PostgreSQL |
+| [forest-analysis-app/USER_GUIDE.md](forest-analysis-app/USER_GUIDE.md) | Guía de uso |
+| [forest-analysis-app/CHANGELOG.md](forest-analysis-app/CHANGELOG.md) | Historial de versiones |
+| [docs/VISION.md](docs/VISION.md) | Visión del producto FMS |
 
-FMS integra en una sola plataforma:
+## 🌿 Ramas
 
-- 🗺️ **Mapeo de fincas, rodales, parcelas y rutas**
-- 🌳 **Inventario forestal por árbol individual**
-- 📦 **Trazabilidad completa desde árbol hasta SKU final**
-- 📲 **Aplicación Android offline para trabajo en campo**
-- 🖥️ **Cliente de escritorio Windows para análisis, GIS y BI**
-- 🧮 **Cálculo de volumen en pie**
-- ⚠️ **Alertas tempranas agronómicas y operativas**
-- 🧪 **Recomendaciones de fertilización por lote**
-- 🪵 **Gestión de tala, trozas y códigos QR**
-- 🏗️ **Cálculo seguro de tensión de cables**
-- 🚛 **Remisiones y manifiestos de transporte**
-- ⚖️ **Conciliación con báscula camionera**
-- 🏭 **Control de aserrío, yield y secado**
-- 📊 **OEE para maquinaria industrial**
-- 💰 **Costeo ABC en COP por metro cúbico**
-- 👷 **Liquidación de contratistas basada en volumen validado**
-- 🔄 **Sincronización offline/online entre campo, escritorio y servidor**
+- `version1.2`: versión actual (mapa de trazabilidad, validación espacial, cable vía mejorado).
+- `pruebas_1`: rama de pruebas que despliega en GitHub Pages.
+- `prueva-verción-de-busqueda-de-zonas`: experimento de búsqueda de zonas.
 
----
+## 👥 Autores
 
-## 🧩 Problema que resuelve
+Proyecto desarrollado en equipo por:
 
-En muchas operaciones forestales, la información se fragmenta en diferentes lugares:
-
-- libretas de campo;
-- hojas de cálculo;
-- mensajes de WhatsApp;
-- fotos sin ubicación;
-- cálculos manuales;
-- estimaciones sin trazabilidad;
-- remisiones desconectadas;
-- costos generales no asignados al lote real;
-- pagos a contratistas basados en aproximaciones;
-- alertas tardías o inexistentes;
-- poca visibilidad sobre mermas, pérdidas y rendimiento.
-
-Esto genera:
-
-- baja trazabilidad;
-- sobrecostos;
-- pérdida de madera;
-- errores de inventario;
-- riesgos operativos;
-- decisiones lentas;
-- dificultad para auditar;
-- baja productividad;
-- pagos incorrectos;
-- desconocimiento del costo real por metro cúbico.
-
-FMS centraliza toda esta información y la convierte en decisiones operativas medibles.
-
----
-
-## 🔥 Por qué FMS puede cambiar la forma de trabajar
-
-FMS permite pasar de una operación reactiva a una operación inteligente.
-
-Antes:
-
-```text
-Campo separado de oficina.
-Oficina separada de planta.
-Planta separada de finanzas.
-Finanzas separadas de la trazabilidad real.
+- **Juan José Román Bedoya** ([@juan2052H](https://github.com/juan2052H))
+- **Jose David Osorio Gallego** ([@josedavidosorio2005](https://github.com/josedavidosorio2005))
