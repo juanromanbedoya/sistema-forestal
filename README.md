@@ -26,7 +26,7 @@ Aplicación web **full stack** para analizar y gestionar zonas forestales sobre 
 ## 🚀 Ejecución rápida (SQLite, sin instalar base de datos)
 
 ```bash
-git clone https://github.com/juan2052H/sistema-forestal.git
+git clone https://github.com/juanromanbedoya/sistema-forestal.git
 cd sistema-forestal/forest-analysis-app
 
 # Backend
@@ -69,5 +69,5 @@ En Windows también puedes usar `forest-analysis-app/start.bat`.
 
 Proyecto desarrollado en equipo por:
 
-- **Juan José Román Bedoya** ([@juan2052H](https://github.com/juan2052H))
+- **Juan José Román Bedoya** ([@juanromanbedoya](https://github.com/juanromanbedoya))
 - **Jose David Osorio Gallego** ([@josedavidosorio2005](https://github.com/josedavidosorio2005))
